@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guessing Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="game-card">
+
+  <div class="top-bar">
+    <h1>🎯 Number Guessing Game</h1>
+    <button id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+
+  <p class="subtitle" id="rangeText">I'm thinking of a number between 1 and 100...</p>
+
+  <!-- Difficulty selector -->
+  <div class="difficulty-row">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty">
+      <option value="50">Easy (1–50)</option>
+      <option value="100" selected>Medium (1–100)</option>
+      <option value="500">Hard (1–500)</option>
+    </select>
+  </div>
+
+  <div class="input-row">
+    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+    <button id="guessBtn">Guess</button>
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <!-- Live narrowing range -->
+  <div class="range-hint" id="liveRange"></div>
+
+  <button id="resetBtn">🔄 Play Again</button>
+
+  <div class="stats">
+    <div>Attempts: <span id="attempts">0</span></div>
+    <div>Time: <span id="timer">0s</span></div>
+    <div>Best: <span id="bestScore">--</span></div>
+  </div>
+
+  <!-- Guess history -->
+  <div class="history-section">
+    <h3>Guess History</h3>
+    <ul id="historyList" class="history-list"></ul>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
