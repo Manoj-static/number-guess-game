@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-grad-1: #667eea;
+  --bg-grad-2: #764ba2;
+  --card-bg: #ffffff;
+  --text-main: #2d2d3a;
+  --text-sub: #6b6b7b;
+  --border-color: #e0e0e8;
+  --history-bg: #f7f7fb;
+}
+
+body.dark {
+  --bg-grad-1: #1f1147;
+  --bg-grad-2: #0f0c29;
+  --card-bg: #1e1e2f;
+  --text-main: #f1f1f5;
+  --text-sub: #a0a0b0;
+  --border-color: #3a3a4d;
+  --history-bg: #2a2a3d;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: background 0.3s;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#confettiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.game-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+  z-index: 1;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+h1 {
+  font-size: 22px;
+  color: var(--text-main);
+}
+
+#themeToggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtitle {
+  color: var(--text-sub);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.difficulty-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.difficulty-row select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+input[type="number"] {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  background: var(--card-bg);
+  color: var(--text-main);
+  transition: border-color 0.2s;
+}
+
+input[type="number"]:focus {
+  border-color: #764ba2;
+}
+
+button {
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+#guessBtn {
+  background: #764ba2;
+  color: white;
+}
+
+#guessBtn:hover {
+  opacity: 0.9;
+}
+
+#guessBtn:active {
+  transform: scale(0.97);
+}
+
+#resetBtn {
+  background: #f0f0f5;
+  color: #444;
+  width: 100%;
+  margin-top: 6px;
+  display: none;
+}
+
+body.dark #resetBtn {
+  background: #33334a;
+  color: #eee;
+}
+
+#resetBtn:hover {
+  opacity: 0.85;
+}
+
+.message {
+  min-height: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.message.too-high {
+  background: #fff1e6;
+  color: #c0521a;
+}
+
+.message.too-low {
+  background: #e6f0ff;
+  color: #1a4dc0;
+}
+
+.message.correct {
+  background: #e6f9ee;
+  color: #1a8a4d;
+}
+
+.range-hint {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 16px;
+  min-height: 16px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-sub);
+  padding: 10px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 14px;
+}
+
+.stats span {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.history-section {
+  text-align: left;
+}
+
+.history-section h3 {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.history-list {
+  list-style: none;
+  max-height: 140px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history-list li {
+  background: var(--history-bg);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-main);
+}
+
+.history-list li .tag {
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.tag.high {
+  background: #ffe4d1;
+  color: #c0521a;
+}
+
+.tag.low {
+  background: #d6e4ff;
+  color: #1a4dc0;
+}
+
+.tag.win {
+  background: #d1f5e0;
+  color: #1a8a4d;
+}
